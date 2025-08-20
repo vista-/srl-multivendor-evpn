@@ -1,0 +1,337 @@
+name: srl-multivendor-evpn
+
+topology:
+  kinds:
+    nokia_srlinux:
+      image: ghcr.io/nokia/srlinux:25.7
+      startup-config: ./configs/__clabNodeName__.conf
+    juniper_vjunosevolved:
+      image: vrnetlab/juniper_vjunosevolved:23.4R2-S2.1
+      startup-config: ./configs/__clabNodeName__.conf
+    arista_ceos:
+      image: arista_ceos:4.33.4M
+      startup-config: ./configs/__clabNodeName__.conf
+      env:
+        INTFTYPE: et
+    linux:
+      image: ghcr.io/srl-labs/network-multitool
+
+  nodes:
+    srl-leaf1:
+      kind: nokia_srlinux
+      type: ixr-d2l
+      labels:
+        graph-posX: "-37"
+        graph-posY: "44"
+        graph-icon: leaf
+        graph-groupLabelPos: bottom-center
+        graph-geoCoordinateLat: "49.381436143745816"
+        graph-geoCoordinateLng: "9.550775771695658"
+        graph-group: leafs
+        graph-level: "1"
+      image: ghcr.io/nokia/srlinux:25.7
+    srl-leaf2:
+      kind: nokia_srlinux
+      type: ixr-d2l
+      labels:
+        graph-posX: "47"
+        graph-posY: "44"
+        graph-icon: leaf
+        graph-groupLabelPos: bottom-center
+        graph-geoCoordinateLat: "48.929973185769853"
+        graph-geoCoordinateLng: "9.452623415479865"
+        graph-group: leafs
+        graph-level: "1"
+      image: ghcr.io/nokia/srlinux:25.7
+    srl-spine:
+      kind: nokia_srlinux
+      type: ixr-d3l
+      labels:
+        graph-posX: "61"
+        graph-posY: "-82"
+        graph-icon: spine
+        graph-groupLabelPos: bottom-center
+        graph-geoCoordinateLat: "48.787427621905458"
+        graph-geoCoordinateLng: "9.676222791243331"
+        graph-group: spines
+        graph-level: "1"
+      image: ghcr.io/nokia/srlinux:25.7
+    junos-leaf1:
+      kind: juniper_vjunosevolved
+      labels:
+        graph-posX: "131"
+        graph-posY: "44"
+        graph-geoCoordinateLat: "49.039984226323924"
+        graph-geoCoordinateLng: "10.349805847333803"
+        graph-icon: leaf
+        graph-groupLabelPos: bottom-center
+        graph-group: leafs
+        graph-level: "1"
+      image: vrnetlab/juniper_vjunosevolved:23.4R2-S2.1
+    junos-leaf2:
+      kind: juniper_vjunosevolved
+      labels:
+        graph-posX: "215"
+        graph-posY: "44"
+        graph-geoCoordinateLat: "49.039984226323924"
+        graph-geoCoordinateLng: "10.349805847333803"
+        graph-icon: leaf
+        graph-groupLabelPos: bottom-center
+        graph-group: leafs
+        graph-level: "1"
+      image: vrnetlab/juniper_vjunosevolved:23.4R2-S2.1
+    junos-spine:
+      kind: juniper_vjunosevolved
+      labels:
+        graph-posX: "173"
+        graph-posY: "-82"
+        graph-geoCoordinateLat: "49.039984226323924"
+        graph-geoCoordinateLng: "10.349805847333803"
+        graph-icon: spine
+        graph-groupLabelPos: bottom-center
+        graph-group: spines
+        graph-level: "1"
+      image: vrnetlab/juniper_vjunosevolved:23.4R2-S2.1
+    arista-leaf1:
+      kind: arista_ceos
+      image: arista_ceos:4.33.4M
+      labels:
+        graph-posX: "299"
+        graph-posY: "44"
+        graph-geoCoordinateLat: "49.431113590297024"
+        graph-geoCoordinateLng: "10.100726261823089"
+        graph-icon: router
+        graph-groupLabelPos: bottom-center
+        graph-group: leafs
+        graph-level: "1"
+    arista-leaf2:
+      kind: arista_ceos
+      image: arista_ceos:4.33.4M
+      labels:
+        graph-posX: "383"
+        graph-posY: "44"
+        graph-geoCoordinateLat: "49.455777268097613"
+        graph-geoCoordinateLng: "10.813548885770480"
+        graph-icon: router
+        graph-groupLabelPos: bottom-center
+        graph-group: leafs
+        graph-level: "1"
+    arista-spine:
+      kind: arista_ceos
+      image: arista_ceos:4.33.4M
+      labels:
+        graph-posX: "285"
+        graph-posY: "-82"
+        graph-geoCoordinateLat: "49.162118666055434"
+        graph-geoCoordinateLng: "10.678644869807393"
+        graph-icon: router
+        graph-groupLabelPos: bottom-center
+        graph-group: spines
+        graph-level: "1"
+
+    # Clients for different use-cases
+    ## EVPN-MH multivendor
+    client-evpnmh:
+      kind: linux
+      labels:
+        graph-posX: "173"
+        graph-posY: "142"
+        graph-geoCoordinateLat: "49.177684506380849"
+        graph-geoCoordinateLng: "10.048433779463753"
+        graph-icon: router
+        graph-groupLabelPos: bottom-center
+        graph-group: clients
+        graph-level: "3"
+      image: ghcr.io/srl-labs/network-multitool
+      exec:
+        - ip link set dev eth1 down
+        - ip link set dev eth2 down
+        - ip link set dev eth3 down
+        - ip link set dev eth4 down
+        - ip link add name bond0 type bond mode 802.3ad xmit_hash_policy layer3+4 miimon 100 rate 1
+        - ip link set dev bond0 up
+        - ip link set dev eth1 master bond0
+        - ip link set dev eth2 master bond0
+        - ip link set dev eth3 master bond0
+        - ip link set dev eth4 master bond0
+        - ip link set dev eth1 up
+        - ip link set dev eth2 up
+        - ip link set dev eth3 up
+        - ip link set dev eth4 up
+        - ip link add link bond0 name bond0.20 type vlan id 20
+        - ip addr add 192.168.20.2/24 dev bond0.20
+        - ip link set dev bond0.20 up
+    ## L2 EVPN
+    client-l2-srl:
+      kind: linux
+      labels:
+        graph-posX: "-37"
+        graph-posY: "170"
+        graph-geoCoordinateLat: "49.377760728355980"
+        graph-geoCoordinateLng: "10.205873144436794"
+        graph-icon: router
+        graph-groupLabelPos: bottom-center
+        graph-group: clients
+        graph-level: "3"
+      image: ghcr.io/srl-labs/network-multitool
+      exec:
+        - ip link add link eth1 name eth1.10 type vlan id 10
+        - ip addr add 192.168.10.11/24 dev eth1.10
+        - ip link set dev eth1.10 up
+        - ip link add link eth1 name eth1.20 type vlan id 20
+        - ip addr add 192.168.20.11/24 dev eth1.20
+        - ip link set dev eth1.20 up
+    client-l2-junos:
+      kind: linux
+      labels:
+        graph-posX: "131"
+        graph-posY: "170"
+        graph-geoCoordinateLat: "49.335764429496336"
+        graph-geoCoordinateLng: "9.981957384275061"
+        graph-icon: router
+        graph-groupLabelPos: bottom-center
+        graph-group: clients
+        graph-level: "3"
+      image: ghcr.io/srl-labs/network-multitool
+      exec:
+        - ip link add link eth1 name eth1.10 type vlan id 10
+        - ip addr add 192.168.10.12/24 dev eth1.10
+        - ip link set dev eth1.10 up
+        - ip link add link eth1 name eth1.20 type vlan id 20
+        - ip addr add 192.168.20.12/24 dev eth1.20
+        - ip link set dev eth1.20 up
+    client-l2-arista:
+      kind: linux
+      labels:
+        graph-posX: "299"
+        graph-posY: "170"
+        graph-geoCoordinateLat: "49.156905289968641"
+        graph-geoCoordinateLng: "10.372731874535694"
+        graph-icon: router
+        graph-groupLabelPos: bottom-center
+        graph-group: clients
+        graph-level: "3"
+      image: ghcr.io/srl-labs/network-multitool
+      exec:
+        - ip link add link eth1 name eth1.10 type vlan id 10
+        - ip addr add 192.168.10.13/24 dev eth1.10
+        - ip link set dev eth1.10 up
+        - ip link add link eth1 name eth1.20 type vlan id 20
+        - ip addr add 192.168.20.13/24 dev eth1.20
+        - ip link set dev eth1.20 up
+    ## L3 EVPN clients
+    client-l3-srl:
+      kind: linux
+      labels:
+        graph-posX: "47"
+        graph-posY: "170"
+        graph-geoCoordinateLat: "49.483344689243395"
+        graph-geoCoordinateLng: "9.970614855352043"
+        graph-icon: router
+        graph-groupLabelPos: bottom-center
+        graph-group: clients
+        graph-level: "3"
+      image: ghcr.io/srl-labs/network-multitool
+      exec:
+        - ip link add link eth1 name eth1.100 type vlan id 100
+        - ip addr add 192.168.30.0/31 dev eth1.100
+        - ip link set dev eth1.100 up
+        - ip ro add 192.168.30.0/24 via 192.168.30.1
+        - ip link add link eth1 name eth1.200 type vlan id 200
+        - ip addr add 192.168.40.11/24
+        - ip link set dev eth1.200 up
+    client-l3-junos:
+      kind: linux
+      labels:
+        graph-posX: "215"
+        graph-posY: "170"
+        graph-geoCoordinateLat: "49.175339138566990"
+        graph-geoCoordinateLng: "10.529615908146051"
+        graph-icon: router
+        graph-groupLabelPos: bottom-center
+        graph-group: clients
+        graph-level: "3"
+      image: ghcr.io/srl-labs/network-multitool
+      exec:
+        - ip link add link eth1 name eth1.100 type vlan id 100
+        - ip addr add 192.168.30.2/31 dev eth1.100
+        - ip link set dev eth1.100 up
+        - ip ro add 192.168.30.0/24 via 192.168.30.3
+        - ip link add link eth1 name eth1.200 type vlan id 200
+        - ip addr add 192.168.40.12/24
+        - ip link set dev eth1.200 up
+    client-l3-arista:
+      kind: linux
+      labels:
+        graph-posX: "383"
+        graph-posY: "170"
+        graph-geoCoordinateLat: "49.693885122773509"
+        graph-geoCoordinateLng: "10.303262570289506"
+        graph-icon: router
+        graph-groupLabelPos: bottom-center
+        graph-group: clients
+        graph-level: "3"
+      image: ghcr.io/srl-labs/network-multitool
+      exec:
+        - ip link add link eth1 name eth1.100 type vlan id 100
+        - ip addr add 192.168.30.4/31 dev eth1.100
+        - ip link set dev eth1.100 up
+        - ip ro add 192.168.30.0/24 via 192.168.30.5
+        - ip link add link eth1 name eth1.200 type vlan id 200
+        - ip addr add 192.168.40.13/24
+        - ip link set dev eth1.200 up
+
+  links:
+    # inter-switch links
+    ## SR Linux to SR Linux
+    - endpoints: [ srl-leaf1:ethernet-1/56, srl-spine:ethernet-1/1 ]
+    - endpoints: [ srl-leaf2:ethernet-1/56, srl-spine:ethernet-1/2 ]
+
+    ## SR Linux to Junos
+    - endpoints: [ srl-leaf1:ethernet-1/55, junos-spine:et-0/0/0 ]
+    - endpoints: [ srl-leaf2:ethernet-1/55, junos-spine:et-0/0/1 ]
+
+    ## SR Linux to Arista
+    - endpoints: [ srl-leaf1:ethernet-1/54, arista-spine:et1 ]
+    - endpoints: [ srl-leaf2:ethernet-1/54, arista-spine:et2 ]
+
+    ## Junos to Junos
+    - endpoints: [ junos-leaf1:et-0/0/10, junos-spine:et-0/0/2 ]
+    - endpoints: [ junos-leaf2:ge-0/0/10, junos-spine:et-0/0/3 ]
+
+    ## Junos to SR Linux
+    - endpoints: [ junos-leaf1:et-0/0/11, srl-spine:ethernet-1/3 ]
+    - endpoints: [ junos-leaf2:et-0/0/11, srl-spine:ethernet-1/4 ]
+
+    ## Junos to Arista
+    - endpoints: [ junos-leaf1:et-0/0/9, arista-spine:et3 ]
+    - endpoints: [ junos-leaf2:et-0/0/9, arista-spine:et4 ]
+
+    ## Arista to Arista
+    - endpoints: [ arista-leaf1:et45, arista-spine:et5 ]
+    - endpoints: [ arista-leaf2:et45, arista-spine:et6 ]
+
+    ## Arista to SR Linux
+    - endpoints: [ arista-leaf1:et47, srl-spine:ethernet-1/5 ]
+    - endpoints: [ arista-leaf2:et47, srl-spine:ethernet-1/6 ]
+
+    ## Arista to Junos
+    - endpoints: [ arista-leaf1:et46, junos-spine:et-0/0/4 ]
+    - endpoints: [ arista-leaf2:et46, junos-spine:et-0/0/5 ]
+
+    # client links
+    ## SR Linux
+    - endpoints: [ srl-leaf1:ethernet-1/1, client-l2-srl:eth1 ]
+    - endpoints: [ srl-leaf2:ethernet-1/1, client-l3-srl:eth1 ]
+    - endpoints: [ srl-leaf1:ethernet-1/2, client-evpnmh:eth1 ]
+    - endpoints: [ srl-leaf2:ethernet-1/2, client-evpnmh:eth2 ]
+
+    ## Junos
+    - endpoints: [ junos-leaf1:et-0/0/0, client-l2-junos:eth1 ]
+    - endpoints: [ junos-leaf2:et-0/0/0, client-l3-junos:eth1 ]
+    - endpoints: [ junos-leaf1:et-0/0/1, client-evpnmh:eth3 ]
+
+    ## Arista
+    - endpoints: [ arista-leaf1:et1, client-l2-arista:eth1 ]
+    - endpoints: [ arista-leaf2:et1, client-l3-arista:eth1 ]
+    - endpoints: [ arista-leaf1:et2, client-evpnmh:eth4 ]

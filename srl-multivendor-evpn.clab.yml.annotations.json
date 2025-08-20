@@ -1,0 +1,288 @@
+{
+  "freeTextAnnotations": [],
+  "groupStyleAnnotations": [
+    {
+      "id": "clients:3",
+      "backgroundColor": "#daff1f",
+      "backgroundOpacity": 20,
+      "borderColor": "#dddddd",
+      "borderWidth": 0.5,
+      "borderStyle": "solid",
+      "borderRadius": 0,
+      "color": "#ebecf0"
+    },
+    {
+      "id": "leafs:2",
+      "backgroundColor": "#2e9aff",
+      "backgroundOpacity": 20,
+      "borderColor": "#dddddd",
+      "borderWidth": 0.5,
+      "borderStyle": "solid",
+      "borderRadius": 0,
+      "color": "#ebecf0"
+    },
+    {
+      "id": "spines:1",
+      "backgroundColor": "#24ff83",
+      "backgroundOpacity": 20,
+      "borderColor": "#dddddd",
+      "borderWidth": 0.5,
+      "borderStyle": "solid",
+      "borderRadius": 0,
+      "color": "#ebecf0"
+    },
+    {
+      "id": "leafs:1",
+      "backgroundColor": "#2954ff",
+      "backgroundOpacity": 20,
+      "borderColor": "#dddddd",
+      "borderWidth": 0.5,
+      "borderStyle": "solid",
+      "borderRadius": 0,
+      "color": "#ebecf0"
+    }
+  ],
+  "nodeAnnotations": [
+    {
+      "id": "srl-leaf1",
+      "position": {
+        "x": -37,
+        "y": 44
+      },
+      "icon": "leaf",
+      "geoCoordinates": {
+        "lat": 49.381436143745816,
+        "lng": 9.550775771695658
+      },
+      "groupLabelPos": "bottom-center",
+      "group": "leafs",
+      "level": "1"
+    },
+    {
+      "id": "srl-leaf2",
+      "position": {
+        "x": 47,
+        "y": 44
+      },
+      "icon": "leaf",
+      "geoCoordinates": {
+        "lat": 48.92997318576985,
+        "lng": 9.452623415479865
+      },
+      "groupLabelPos": "bottom-center",
+      "group": "leafs",
+      "level": "1"
+    },
+    {
+      "id": "srl-spine",
+      "position": {
+        "x": 61,
+        "y": -82
+      },
+      "icon": "spine",
+      "geoCoordinates": {
+        "lat": 48.78742762190546,
+        "lng": 9.676222791243331
+      },
+      "groupLabelPos": "bottom-center",
+      "group": "spines",
+      "level": "1"
+    },
+    {
+      "id": "junos-leaf1",
+      "position": {
+        "x": 131,
+        "y": 44
+      },
+      "icon": "leaf",
+      "geoCoordinates": {
+        "lat": 49.039984226323924,
+        "lng": 10.349805847333803
+      },
+      "groupLabelPos": "bottom-center",
+      "group": "leafs",
+      "level": "1"
+    },
+    {
+      "id": "junos-leaf2",
+      "position": {
+        "x": 215,
+        "y": 44
+      },
+      "icon": "leaf",
+      "geoCoordinates": {
+        "lat": 49.039984226323924,
+        "lng": 10.349805847333803
+      },
+      "groupLabelPos": "bottom-center",
+      "group": "leafs",
+      "level": "1"
+    },
+    {
+      "id": "junos-spine",
+      "position": {
+        "x": 173,
+        "y": -82
+      },
+      "icon": "spine",
+      "geoCoordinates": {
+        "lat": 49.039984226323924,
+        "lng": 10.349805847333803
+      },
+      "groupLabelPos": "bottom-center",
+      "group": "spines",
+      "level": "1"
+    },
+    {
+      "id": "arista-leaf1",
+      "position": {
+        "x": 299,
+        "y": 44
+      },
+      "icon": "router",
+      "geoCoordinates": {
+        "lat": 49.431113590297024,
+        "lng": 10.10072626182309
+      },
+      "groupLabelPos": "bottom-center",
+      "group": "leafs",
+      "level": "1"
+    },
+    {
+      "id": "arista-leaf2",
+      "position": {
+        "x": 383,
+        "y": 44
+      },
+      "icon": "router",
+      "geoCoordinates": {
+        "lat": 49.45577726809761,
+        "lng": 10.81354888577048
+      },
+      "groupLabelPos": "bottom-center",
+      "group": "leafs",
+      "level": "1"
+    },
+    {
+      "id": "arista-spine",
+      "position": {
+        "x": 285,
+        "y": -82
+      },
+      "icon": "router",
+      "geoCoordinates": {
+        "lat": 49.162118666055434,
+        "lng": 10.678644869807393
+      },
+      "groupLabelPos": "bottom-center",
+      "group": "spines",
+      "level": "1"
+    },
+    {
+      "id": "client-evpnmh",
+      "position": {
+        "x": 173,
+        "y": 142
+      },
+      "icon": "router",
+      "geoCoordinates": {
+        "lat": 49.17768450638085,
+        "lng": 10.048433779463753
+      },
+      "groupLabelPos": "bottom-center",
+      "group": "clients",
+      "level": "3"
+    },
+    {
+      "id": "client-l2-srl",
+      "position": {
+        "x": -37,
+        "y": 170
+      },
+      "icon": "router",
+      "geoCoordinates": {
+        "lat": 49.37776072835598,
+        "lng": 10.205873144436794
+      },
+      "groupLabelPos": "bottom-center",
+      "group": "clients",
+      "level": "3"
+    },
+    {
+      "id": "client-l2-junos",
+      "position": {
+        "x": 131,
+        "y": 170
+      },
+      "icon": "router",
+      "geoCoordinates": {
+        "lat": 49.33576442949634,
+        "lng": 9.981957384275061
+      },
+      "groupLabelPos": "bottom-center",
+      "group": "clients",
+      "level": "3"
+    },
+    {
+      "id": "client-l2-arista",
+      "position": {
+        "x": 299,
+        "y": 170
+      },
+      "icon": "router",
+      "geoCoordinates": {
+        "lat": 49.15690528996864,
+        "lng": 10.372731874535694
+      },
+      "groupLabelPos": "bottom-center",
+      "group": "clients",
+      "level": "3"
+    },
+    {
+      "id": "client-l3-srl",
+      "position": {
+        "x": 47,
+        "y": 170
+      },
+      "icon": "router",
+      "geoCoordinates": {
+        "lat": 49.483344689243395,
+        "lng": 9.970614855352043
+      },
+      "groupLabelPos": "bottom-center",
+      "group": "clients",
+      "level": "3"
+    },
+    {
+      "id": "client-l3-junos",
+      "position": {
+        "x": 215,
+        "y": 170
+      },
+      "icon": "router",
+      "geoCoordinates": {
+        "lat": 49.17533913856699,
+        "lng": 10.52961590814605
+      },
+      "groupLabelPos": "bottom-center",
+      "group": "clients",
+      "level": "3"
+    },
+    {
+      "id": "client-l3-arista",
+      "position": {
+        "x": 383,
+        "y": 170
+      },
+      "icon": "router",
+      "geoCoordinates": {
+        "lat": 49.69388512277351,
+        "lng": 10.303262570289506
+      },
+      "groupLabelPos": "bottom-center",
+      "group": "clients",
+      "level": "3"
+    }
+  ],
+  "cloudNodeAnnotations": []
+}
