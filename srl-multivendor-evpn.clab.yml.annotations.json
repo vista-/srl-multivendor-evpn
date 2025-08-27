@@ -12,16 +12,6 @@
       "color": "#ebecf0"
     },
     {
-      "id": "leafs:2",
-      "backgroundColor": "#2e9aff",
-      "backgroundOpacity": 20,
-      "borderColor": "#dddddd",
-      "borderWidth": 0.5,
-      "borderStyle": "solid",
-      "borderRadius": 0,
-      "color": "#ebecf0"
-    },
-    {
       "id": "spines:1",
       "backgroundColor": "#24ff83",
       "backgroundOpacity": 20,
@@ -42,6 +32,7 @@
       "color": "#ebecf0"
     }
   ],
+  "cloudNodeAnnotations": [],
   "nodeAnnotations": [
     {
       "id": "srl-leaf1",
@@ -181,7 +172,7 @@
     {
       "id": "client-evpnmh",
       "position": {
-        "x": 173,
+        "x": 172,
         "y": 142
       },
       "icon": "router",
@@ -196,7 +187,7 @@
     {
       "id": "client-l2-srl",
       "position": {
-        "x": -37,
+        "x": -38,
         "y": 170
       },
       "icon": "router",
@@ -211,7 +202,7 @@
     {
       "id": "client-l2-junos",
       "position": {
-        "x": 131,
+        "x": 130,
         "y": 170
       },
       "icon": "router",
@@ -226,7 +217,7 @@
     {
       "id": "client-l2-arista",
       "position": {
-        "x": 299,
+        "x": 298,
         "y": 170
       },
       "icon": "router",
@@ -241,7 +232,7 @@
     {
       "id": "client-l3-srl",
       "position": {
-        "x": 47,
+        "x": 46,
         "y": 170
       },
       "icon": "router",
@@ -256,7 +247,7 @@
     {
       "id": "client-l3-junos",
       "position": {
-        "x": 215,
+        "x": 214,
         "y": 170
       },
       "icon": "router",
@@ -271,7 +262,7 @@
     {
       "id": "client-l3-arista",
       "position": {
-        "x": 383,
+        "x": 382,
         "y": 170
       },
       "icon": "router",
@@ -283,6 +274,5 @@
       "group": "clients",
       "level": "3"
     }
-  ],
-  "cloudNodeAnnotations": []
+  ]
 }
